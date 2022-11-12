@@ -1,0 +1,420 @@
+[
+    {
+        "id": "f205fcd1918d6a38",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5fa2d89695679332",
+        "type": "ibmiot in",
+        "z": "f205fcd1918d6a38",
+        "authentication": "apiKey",
+        "apiKey": "d7e4a15feb6c5da4",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "Python_iot",
+        "applicationId": "",
+        "deviceType": "ibm_iot",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": false,
+        "allApplications": "",
+        "allDeviceTypes": false,
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "9ba63d107f56fb24",
+                "69b2e0bb1498385c",
+                "2fb65612cc981dda"
+            ]
+        ]
+    },
+    {
+        "id": "9ba63d107f56fb24",
+        "type": "debug",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 430,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "c9ae6717463ccdcb",
+        "type": "ui_gauge",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "group": "0d1c6a81e87e4e55",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 690,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "69b2e0bb1498385c",
+        "type": "function",
+        "z": "f205fcd1918d6a38",
+        "name": "temperature",
+        "func": "msg.payload=msg.payload.temp\nglobal.set('t',msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "c9ae6717463ccdcb"
+            ]
+        ]
+    },
+    {
+        "id": "2fb65612cc981dda",
+        "type": "function",
+        "z": "f205fcd1918d6a38",
+        "name": "humidity",
+        "func": "msg.payload=msg.payload.humid\nglobal.set('h',msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 340,
+        "wires": [
+            [
+                "833e7f6d8247837d"
+            ]
+        ]
+    },
+    {
+        "id": "833e7f6d8247837d",
+        "type": "ui_gauge",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "group": "0d1c6a81e87e4e55",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 680,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "77f027c16cd3b5e7",
+        "type": "ui_button",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "group": "0d1c6a81e87e4e55",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Motor On",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Motor ON",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 120,
+        "y": 620,
+        "wires": [
+            [
+                "b544dba163ec4ab4",
+                "d954c95f1a965e42"
+            ]
+        ]
+    },
+    {
+        "id": "b544dba163ec4ab4",
+        "type": "debug",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "d954c95f1a965e42",
+        "type": "ibmiot out",
+        "z": "f205fcd1918d6a38",
+        "authentication": "apiKey",
+        "apiKey": "d7e4a15feb6c5da4",
+        "outputType": "evt",
+        "deviceId": "Python_iot",
+        "deviceType": "ibm_iot",
+        "eventCommandType": "command",
+        "format": "String",
+        "data": "1",
+        "qos": 0,
+        "name": "IBM IoT",
+        "service": "registered",
+        "x": 580,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "41b5c03a5469885c",
+        "type": "http in",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "url": "/sensor",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 440,
+        "wires": [
+            [
+                "348c30c599cef19a"
+            ]
+        ]
+    },
+    {
+        "id": "348c30c599cef19a",
+        "type": "function",
+        "z": "f205fcd1918d6a38",
+        "name": "hhtpfunctionnode",
+        "func": "msg.payload={\"temperature\":global.get(\"t\"),\"humidity\":global.get(\"h\")}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 440,
+        "wires": [
+            [
+                "a274ea5cd121e2b4"
+            ]
+        ]
+    },
+    {
+        "id": "a274ea5cd121e2b4",
+        "type": "http response",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "ba8d32851d50cec8",
+        "type": "ui_button",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "group": "0d1c6a81e87e4e55",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Motor off",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "Motor OFF",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 120,
+        "y": 520,
+        "wires": [
+            [
+                "d954c95f1a965e42",
+                "b544dba163ec4ab4"
+            ]
+        ]
+    },
+    {
+        "id": "2e17c3ae7e4e3a4f",
+        "type": "http in",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "url": "/control",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 800,
+        "wires": [
+            [
+                "534d10cad14f87e8",
+                "c55fd242db7397e2"
+            ]
+        ]
+    },
+    {
+        "id": "534d10cad14f87e8",
+        "type": "http response",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 330,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "c55fd242db7397e2",
+        "type": "function",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "func": "msg.payload=msg.payload.command\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 700,
+        "wires": [
+            [
+                "9524dd4921f63814",
+                "d954c95f1a965e42"
+            ]
+        ]
+    },
+    {
+        "id": "9524dd4921f63814",
+        "type": "debug",
+        "z": "f205fcd1918d6a38",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "6f53ae5cbcb9ac1d",
+        "type": "comment",
+        "z": "f205fcd1918d6a38",
+        "name": "Real Time water monitoring & control system",
+        "info": "",
+        "x": 750,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "36a09dbcab7faebf",
+        "type": "ui_spacer",
+        "z": "f205fcd1918d6a38",
+        "name": "spacer",
+        "group": "d99cefdf8f5b3159",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d7e4a15feb6c5da4",
+        "type": "ibmiot",
+        "name": "",
+        "keepalive": "60",
+        "serverName": "uwujz1.messaging.internetofthings.ibmcloud.com",
+        "cleansession": true,
+        "appId": "",
+        "shared": false
+    },
+    {
+        "id": "0d1c6a81e87e4e55",
+        "type": "ui_group",
+        "name": "ibm_iot",
+        "tab": "0b3b4a362ea6184d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "d99cefdf8f5b3159",
+        "type": "ui_group",
+        "name": "weather monitoring",
+        "tab": "0b3b4a362ea6184d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0b3b4a362ea6184d",
+        "type": "ui_tab",
+        "name": "Esp",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
